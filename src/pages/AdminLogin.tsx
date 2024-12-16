@@ -1,6 +1,8 @@
 import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSession, Auth } from "@supabase/auth-helpers-react";
+import { useSession } from "@supabase/auth-helpers-react";
+import { Auth } from "@supabase/auth-ui-react";
+import { ThemeSupa } from "@supabase/auth-ui-shared";
 import { supabase } from "@/integrations/supabase/client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 
@@ -24,7 +26,7 @@ const AdminLogin = () => {
           <Auth
             supabaseClient={supabase}
             appearance={{
-              theme: 'light',
+              theme: ThemeSupa,
               style: {
                 button: {
                   background: 'black',

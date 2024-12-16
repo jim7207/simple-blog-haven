@@ -26,7 +26,7 @@ const Admin = () => {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     
-    if (!session?.user.id) {
+    if (!session?.user?.id) {
       toast({
         title: "Error",
         description: "You must be logged in to create posts",
@@ -36,6 +36,17 @@ const Admin = () => {
     }
 
     try {
+      // First get the user_id from the users table
+      const { data: userData, error: userError } = await supabase
+        .from('users')
+        .select('user_id')
+        .eq('email', session.user.email)
+        .single();
+
+      if (userError || !userData) {
+        throw new Error('Could not find user');
+      }
+
       const slug = title.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
       
       const { error } = await supabase.from("posts").insert({
@@ -43,7 +54,7 @@ const Admin = () => {
         content,
         slug,
         status: isPublished ? "published" : "draft",
-        author_id: session.user.id,
+        author_id: userData.user_id,
         published_at: isPublished ? new Date().toISOString() : null,
       });
 
