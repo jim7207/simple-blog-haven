@@ -27,12 +27,12 @@ const Index = () => {
 
   if (isLoading) {
     return (
-      <div className="p-3">
-        <div className="space-y-2">
+      <div className="container mx-auto p-4">
+        <div className="space-y-4">
           {[1, 2, 3].map((i) => (
             <div key={i} className="w-full">
-              <Skeleton className="h-4 w-3/4 bg-secondary/20" />
-              <Skeleton className="h-3 w-1/2 mt-1 bg-secondary/20" />
+              <Skeleton className="h-6 w-3/4 bg-secondary/20" />
+              <Skeleton className="h-4 w-1/2 mt-2 bg-secondary/20" />
             </div>
           ))}
         </div>
@@ -42,24 +42,34 @@ const Index = () => {
 
   return (
     <div className="min-h-screen bg-background">
-      <header className="bg-primary px-3 py-1">
-        <div className="flex justify-between items-center">
-          <h1 className="text-lg font-bold text-white">Jim's Blog</h1>
-          <Link to="/aboutme" className="text-white hover:underline">
+      <header className="bg-black text-white py-5 px-4">
+        <div className="flex justify-between items-center max-w-5xl mx-auto">
+          <h1 className="text-xl font-bold">Jim's Blog</h1>
+          <Link to="/aboutme" className="text-white hover:text-primary">
             About Me
           </Link>
         </div>
       </header>
       
-      <main className="px-3">
+      <nav className="bg-muted border-b border-border">
+        <div className="max-w-5xl mx-auto py-3 px-4">
+          <div className="flex justify-center space-x-6">
+            <a href="#" className="text-foreground hover:text-primary">Latest</a>
+            <a href="#" className="text-foreground hover:text-primary">Popular</a>
+            <a href="#" className="text-foreground hover:text-primary">Categories</a>
+          </div>
+        </div>
+      </nav>
+      
+      <main className="container max-w-5xl mx-auto px-4 py-8">
         {posts?.map((post) => (
-          <article key={post.post_id} className="py-2 border-b border-secondary/20">
-            <h2 className="text-lg leading-relaxed">
+          <article key={post.post_id} className="mb-8 pb-8 border-b border-input">
+            <h2 className="text-xl font-bold text-black mb-2">
               {post.title}
             </h2>
-            <div className="text-xs text-secondary space-x-1">
+            <div className="text-xs text-secondary space-x-2 mb-4">
               <span>{post.author?.username}</span>
-              <span>|</span>
+              <span>•</span>
               <span>
                 {post.published_at
                   ? format(new Date(post.published_at), "MMM d, yyyy")
@@ -67,12 +77,14 @@ const Index = () => {
               </span>
               {post.categories && (
                 <>
-                  <span>|</span>
-                  <span>{post.categories.name}</span>
+                  <span>•</span>
+                  <a href="#" className="text-primary hover:underline">
+                    {post.categories.name}
+                  </a>
                 </>
               )}
             </div>
-            <p className="text-base text-secondary mt-1">
+            <p className="text-base text-foreground">
               {post.excerpt || post.content.slice(0, 150) + "..."}
             </p>
           </article>
@@ -83,6 +95,12 @@ const Index = () => {
           </div>
         )}
       </main>
+
+      <footer className="bg-muted py-6 px-4 text-center text-sm text-secondary">
+        <div className="max-w-5xl mx-auto">
+          <p>&copy; {new Date().getFullYear()} Jim's Blog. All rights reserved.</p>
+        </div>
+      </footer>
     </div>
   );
 };
