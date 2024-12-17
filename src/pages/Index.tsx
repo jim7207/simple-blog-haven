@@ -45,20 +45,20 @@ const Index = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-4xl font-serif mb-8 text-center">Blog Haven</h1>
+      <h1 className="text-5xl font-extrabold text-center mb-8">Blog Haven</h1>
       <div className="space-y-6">
         {posts?.map((post) => (
-          <Card key={post.post_id} className="w-full hover:shadow-lg transition-shadow">
+          <Card key={post.post_id} className="w-full hover:shadow-lg transition-shadow border border-border">
             <CardHeader>
               <div className="flex justify-between items-start">
-                <CardTitle className="text-2xl font-serif">{post.title}</CardTitle>
+                <CardTitle className="text-2xl font-bold">{post.title}</CardTitle>
                 {post.categories && (
-                  <span className="text-sm text-muted-foreground">
+                  <span className="text-sm text-muted">
                     {post.categories.name}
                   </span>
                 )}
               </div>
-              <div className="flex gap-2 text-sm text-muted-foreground">
+              <div className="flex gap-2 text-sm text-muted">
                 <span>{post.author?.username}</span>
                 <span>•</span>
                 <span>
@@ -69,14 +69,14 @@ const Index = () => {
               </div>
             </CardHeader>
             <CardContent>
-              <p className="text-muted-foreground">
+              <p className="text-muted">
                 {post.excerpt || post.content.slice(0, 150) + "..."}
               </p>
             </CardContent>
           </Card>
         ))}
         {posts?.length === 0 && (
-          <div className="text-center text-muted-foreground py-12">
+          <div className="text-center text-muted py-12">
             No posts found. Check back later!
           </div>
         )}
