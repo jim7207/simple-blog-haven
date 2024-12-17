@@ -6,91 +6,41 @@
 
 @layer base {
   :root {
-    --background: 0 0% 100%;
-    --foreground: 0 0% 7%;
+    --background: 39 96% 95%;
+    --foreground: 0 0% 0%;
     --card: 0 0% 100%;
-    --card-foreground: 0 0% 7%;
+    --card-foreground: 0 0% 0%;
     --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 7%;
-    --primary: 45 57% 58%;
+    --popover-foreground: 0 0% 0%;
+    --primary: 24 100% 50%;
     --primary-foreground: 0 0% 100%;
-    --secondary: 0 0% 96%;
-    --secondary-foreground: 0 0% 7%;
-    --muted: 0 0% 61%;
-    --muted-foreground: 0 0% 61%;
-    --accent: 45 57% 58%;
+    --secondary: 0 0% 51%;
+    --secondary-foreground: 0 0% 0%;
+    --muted: 0 0% 51%;
+    --muted-foreground: 0 0% 51%;
+    --accent: 240 100% 50%;
     --accent-foreground: 0 0% 100%;
     --destructive: 0 84.2% 60.2%;
     --destructive-foreground: 0 0% 100%;
     --border: 0 0% 89.8%;
     --input: 0 0% 89.8%;
-    --ring: 45 57% 58%;
+    --ring: 24 100% 50%;
     --radius: 0.5rem;
   }
 
   * {
-    @apply border-border box-border;
+    @apply border-border;
   }
 
   body {
-    @apply bg-background text-foreground font-sans text-base antialiased overflow-x-hidden;
-  }
-
-  h1 {
-    @apply text-4xl font-light text-foreground py-5;
-  }
-
-  h2 {
-    @apply text-3xl font-light text-foreground py-3.5;
-  }
-
-  h3 {
-    @apply text-2xl font-bold text-foreground py-2.5;
-  }
-
-  h4 {
-    @apply text-xl font-normal text-foreground py-2;
-  }
-
-  h5 {
-    @apply text-lg font-normal text-foreground py-2;
-  }
-
-  h6 {
-    @apply text-sm font-normal text-foreground py-2;
+    @apply bg-background text-foreground font-sans text-base antialiased;
   }
 
   a {
-    @apply text-primary hover:text-primary transition-colors;
+    @apply text-accent hover:underline;
   }
 
-  p {
-    @apply leading-[25px];
-  }
-
-  .section-title {
-    @apply text-3xl font-bold text-foreground;
-  }
-
-  .section-title:after {
-    @apply block w-[30px] h-[5px] mt-[30px] bg-primary content-[''];
-  }
-
-  .text-center .section-title:after {
-    @apply mx-auto mt-[30px] mb-[25px];
-  }
-
-  .section-subtitle {
-    @apply text-lg font-light text-muted;
-  }
-
-  .button {
-    @apply inline-flex items-center justify-center rounded-md text-sm font-bold 
-           border-2 border-foreground text-foreground px-4 py-2 transition-colors
-           hover:border-primary hover:text-primary;
-  }
-
-  .row {
-    @apply max-w-[1245px] mx-auto py-row relative;
+  a:visited {
+    @apply text-secondary;
   }
 }

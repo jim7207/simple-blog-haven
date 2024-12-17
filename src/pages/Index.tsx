@@ -1,6 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
 import { supabase } from "@/integrations/supabase/client";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { format } from "date-fns";
 import { Skeleton } from "@/components/ui/skeleton";
 import { Link } from "react-router-dom";
@@ -28,18 +27,13 @@ const Index = () => {
 
   if (isLoading) {
     return (
-      <div className="container mx-auto px-4 py-8">
-        <div className="space-y-6">
+      <div className="p-3">
+        <div className="space-y-2">
           {[1, 2, 3].map((i) => (
-            <Card key={i} className="w-full">
-              <CardHeader>
-                <Skeleton className="h-6 w-3/4" />
-              </CardHeader>
-              <CardContent>
-                <Skeleton className="h-4 w-full mb-2" />
-                <Skeleton className="h-4 w-2/3" />
-              </CardContent>
-            </Card>
+            <div key={i} className="w-full">
+              <Skeleton className="h-4 w-3/4 bg-secondary/20" />
+              <Skeleton className="h-3 w-1/2 mt-1 bg-secondary/20" />
+            </div>
           ))}
         </div>
       </div>
@@ -47,57 +41,48 @@ const Index = () => {
   }
 
   return (
-    <div className="relative">
-      <div className="absolute top-4 right-4">
-        <Link to="/aboutme" className="button">
-          About Me
-        </Link>
-      </div>
-      <div className="container mx-auto px-4 py-8">
-        <h1 className="text-5xl font-extrabold text-center mb-8">
-          Jim's Blog
-        </h1>
-        <div className="space-y-6">
-          {posts?.map((post) => (
-            <Card
-              key={post.post_id}
-              className="w-full hover:shadow-lg transition-shadow border border-border"
-            >
-              <CardHeader>
-                <div className="flex justify-between items-start">
-                  <CardTitle className="text-2xl font-bold">
-                    {post.title}
-                  </CardTitle>
-                  {post.categories && (
-                    <span className="text-sm text-muted">
-                      {post.categories.name}
-                    </span>
-                  )}
-                </div>
-                <div className="flex gap-2 text-sm text-muted">
-                  <span>{post.author?.username}</span>
-                  <span>•</span>
-                  <span>
-                    {post.published_at
-                      ? format(new Date(post.published_at), "MMMM d, yyyy")
-                      : "Draft"}
-                  </span>
-                </div>
-              </CardHeader>
-              <CardContent>
-                <p className="text-muted">
-                  {post.excerpt || post.content.slice(0, 150) + "..."}
-                </p>
-              </CardContent>
-            </Card>
-          ))}
-          {posts?.length === 0 && (
-            <div className="text-center text-muted py-12">
-              No posts found. Check back later!
-            </div>
-          )}
+    <div className="min-h-screen bg-background">
+      <header className="bg-primary px-3 py-1">
+        <div className="flex justify-between items-center">
+          <h1 className="text-lg font-bold text-white">Jim's Blog</h1>
+          <Link to="/aboutme" className="text-white hover:underline">
+            About Me
+          </Link>
         </div>
-      </div>
+      </header>
+      
+      <main className="px-3">
+        {posts?.map((post) => (
+          <article key={post.post_id} className="py-2 border-b border-secondary/20">
+            <h2 className="text-lg leading-relaxed">
+              {post.title}
+            </h2>
+            <div className="text-xs text-secondary space-x-1">
+              <span>{post.author?.username}</span>
+              <span>|</span>
+              <span>
+                {post.published_at
+                  ? format(new Date(post.published_at), "MMM d, yyyy")
+                  : "Draft"}
+              </span>
+              {post.categories && (
+                <>
+                  <span>|</span>
+                  <span>{post.categories.name}</span>
+                </>
+              )}
+            </div>
+            <p className="text-base text-secondary mt-1">
+              {post.excerpt || post.content.slice(0, 150) + "..."}
+            </p>
+          </article>
+        ))}
+        {posts?.length === 0 && (
+          <div className="text-center text-secondary py-8">
+            No posts found. Check back later!
+          </div>
+        )}
+      </main>
     </div>
   );
 };
