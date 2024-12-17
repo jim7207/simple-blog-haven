@@ -10,11 +10,13 @@ const Index = () => {
     queryFn: async () => {
       const { data, error } = await supabase
         .from("posts")
-        .select(`
+        .select(
+          `
           *,
           categories(name),
           author:users(username)
-        `)
+        `,
+        )
         .eq("status", "published")
         .order("published_at", { ascending: false });
 
@@ -45,13 +47,20 @@ const Index = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-5xl font-extrabold text-center mb-8">Jim's Blog</h1>
+      <h1 className="text-5xl font-extrabold text-center mb-8">
+        Jim's New Blog
+      </h1>
       <div className="space-y-6">
         {posts?.map((post) => (
-          <Card key={post.post_id} className="w-full hover:shadow-lg transition-shadow border border-border">
+          <Card
+            key={post.post_id}
+            className="w-full hover:shadow-lg transition-shadow border border-border"
+          >
             <CardHeader>
               <div className="flex justify-between items-start">
-                <CardTitle className="text-2xl font-bold">{post.title}</CardTitle>
+                <CardTitle className="text-2xl font-bold">
+                  {post.title}
+                </CardTitle>
                 {post.categories && (
                   <span className="text-sm text-muted">
                     {post.categories.name}
