@@ -72,6 +72,14 @@ export default {
         md: "calc(var(--radius) - 2px)",
         sm: "calc(var(--radius) - 4px)",
       },
+      spacing: {
+        row: "75px",
+      },
+      animation: {
+        'triangle-path-1': 'ball-triangle-path-ball-one 2s infinite ease-in-out',
+        'triangle-path-2': 'ball-triangle-path-ball-two 2s infinite ease-in-out',
+        'triangle-path-3': 'ball-triangle-path-ball-tree 2s infinite ease-in-out',
+      },
     },
   },
   plugins: [require("tailwindcss-animate")],

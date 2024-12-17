@@ -45,7 +45,7 @@ const Index = () => {
 
   return (
     <div className="container mx-auto px-4 py-8">
-      <h1 className="text-5xl font-extrabold text-center mb-8">Blog Haven</h1>
+      <h1 className="text-5xl font-extrabold text-center mb-8">Jim's Blog</h1>
       <div className="space-y-6">
         {posts?.map((post) => (
           <Card key={post.post_id} className="w-full hover:shadow-lg transition-shadow border border-border">
